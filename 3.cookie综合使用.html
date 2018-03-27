@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>cookie 综合使用</title>
+	</head>
+
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 可以实现 添加、修改、删除
+		// 使用说明：
+		// 1、设置成功返回 true，反之返回 false
+		// 2、过期时间未设置，默认七天后过期；设置了某一时间，则过期时间为某一时间；设置为-1，则过期时间前推一年，达到删除 cookie 效果
+		function setCookie(key, value, expires) {
+
+			// 获取当前时间
+			var now = new Date();
+
+			if(expires == -1) {
+				// 将活期时间前推 一年(表示删除)
+				now.setYear(now.getFullYear() - 1);
+				expires = now;
+			} else if(!expires) {
+				// 未设置过期时间默认将过期时间设置为七天后
+				now.setDate(now.getDate() + 7);
+				expires = now;
+			} else if(expires.constructor != now.constructor) {
+				return false;
+			}
+				document.cookie = key + '=' + value + ';expires' + '=' + now;
+			return true;
+		}
+		console.log(document.cookie)
+		// 可以实现查找
+		function getCookie(key) {
+			// 格式：key1 = value1；key2 = value2；...；keyN = valueN；
+			var cookieStr = document.cookie;
+//			console.log(cookieStr);
+			//  以"; "将字符串拆分成一个个 key=value 形式
+			var kvArr = cookieStr.split('; ');
+//			console.log(kvArr);
+			// 利用对象存储最终 key-value 形式数据，原因是对象的属性形式也是 key-value
+			// obj 相当于创建可一个无任何属性的"人"
+//			var obj = new Object();
+			// 遍历 kvArr 将存有属性及值的数值遍历拆分给"人"，以便得到一个具有 name、age、gender 的"人"
+			for (var i = 0; i < kvArr.length; i++) {
+				// kvArr[0]值为 "age=18"，用 "=" 拆分后的 tempArr 值为[age, 18]
+				// i 为1，2...时依此类推
+				var tempArr = kvArr[i].split("=");
+				// 将 tempArr[0](age)作为 obj(人)的属性名
+				// 将 tempArr[1](18)作为 obj(人)的属性值
+//				obj[tempArr[0]] = tempArr[1];
+				if (tempArr[0] == key) {
+					return tempArr[1];
+				}
+			}
+			return null;
+//			console.log(obj);
+		}
+
+		// 添加
+		setCookie('name', 'dadada', new Date(2018, 0, 1));
+		// 增加
+
+		setCookie('age', '18');
+		setCookie('gender', 'female');
+		setCookie('weight', '100');
+		// 修改
+		setCookie('name', 'hehehe');
+		// 删除
+		setCookie('name', 'hehehe', -1);
+		// 错误案例
+		setCookie('gender', 'mal', "error");
+
+		console.log(getCookie("age"));
+		console.log(getCookie("weight"));
+		console.log(getCookie("gender"));
+		console.log(getCookie("yy"));
+	</script>
+
+</html>

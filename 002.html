@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+	<ul data-uid="ul">
+
+	</ul>
+
+	<textarea id="text">
+
+	</textarea>
+
+	<script>
+		function sort(e) {
+			for (let i = 0; i < e.length; i++) {
+				for (let j = 0; j < e.length - i - 1; j++) {
+					if (e[j] > e[j + 1]) {
+						let tem = e[j + 1]
+						e[j + 1] = e[j]
+						e[j] = tem
+
+						console.log(e)
+
+					}
+				}
+			}
+
+			return e
+		}
+
+		let arr = [1, 3, 6, 2]
+		console.log(sort(arr))
+
+		let ul = document.querySelector(`[data-uid="ul"]`)
+		let docfrag = document.createDocumentFragment()
+
+		const browserList = [
+		    "Internet Explorer",
+		    "Mozilla Firefox",
+		    "Safari",
+		    "Chrome",
+		    "Opera"
+		];
+
+		browserList.forEach((item) => {
+			let li = document.createElement("li")
+			li.textContent = item
+			docfrag.appendChild(li)
+
+
+		})
+
+		ul.appendChild(docfrag)
+
+
+		let textarea = document.querySelector("#text")
+
+		var timeoutId = ''
+		textarea.addEventListener("keyup", function() {
+			if (timeoutId) {
+				clearTimeout(timeoutId)
+			}
+
+			timeoutId = setTimeout(function () {
+				console.log(111)
+			}, 1000)
+		})
+
+	</script>
+</body>
+</html>

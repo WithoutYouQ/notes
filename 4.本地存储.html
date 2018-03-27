@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>本地存储(可持续化存储)</title>
+	</head>
+	<body>
+		<button onclick="setSession()">临时本地存储</button>
+		<button onclick="getSession()">读取本地存储</button>
+		<button onclick="setLocal()">永久持续化存储</button>
+		<button onclick="getLocal()">读取持续化存储</button>
+	</body>
+	<script type="text/javascript">
+		// sessionStorage 临时会话存储
+		// 等同 cookie 为设置过期时间存储方式：说生命周期同当前浏览器
+		function setSession(){
+			sessionStorage.setItem("color","pink");
+			sessionStorage.weight = "120kg";
+		}
+		function getSession(){
+			var r1 = sessionStorage.getItem('color');
+			console.log(r1);
+			var r2 = sessionStorage.weight;
+			console.log(r2);
+		}
+		//  localStorage 本地存储
+		// 持续化存储数据：永久保存数据，只有在用户主动删除才会被删除
+		function setLocal(){
+			localStorage.setItem("width","100vw");
+			localStorage.height = "200px";
+		}
+		function getLocal(){
+			var r1 = localStorage.getItem('width');
+			console.log(r1);
+			var r2 = localStorage.height;
+			console.log(r2);
+		}
+		
+		// 删除
+//		sessionStorage.removeItem( key);
+//		localStorage.removeItem( key);
+	</script>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>cookie</title>
+	</head>
+	<body>
+		<div onclick="createCookie()">创建cookie</div>
+	</body>
+	<script type="text/javascript">
+		// cookie 附属于 document
+		
+		function createCookie(){
+			// ① 先打印页面是否有默认 cookie
+			console.log(document.cookie);
+			// ② 通过 "key=value" 形式设置 cookie(cookie 需要的是字符串)
+			document.cookie = "name = gg";
+			console.log(document.cookie);
+			// ③ 区分大小写
+			document.cookie = "NAME=GG"; 				// 省略空格写法
+			console.log(document.cookie);
+			// ④ 如果非"key=value"形式赋值
+			// 没有等号：key 为空，value 为所赋的值
+			// 如果有多个等号：第一个等号前为 key，后面所有内容为 value
+			document.cookie = "NAME:KK";
+			console.log(document.cookie);
+			// ⑤ 是否支持中文
+			// 注：不直接支持中文，中文需转码
+			var keyStr = "姓名";
+			var valueStr = "二珂";
+			
+		
+			// 利用 encode 编码编译中文
+			keyStr = encodeURI(keyStr);
+			console.log(keyStr);
+			
+			// 编码后的内容解码
+			console.log(decodeURI(keyStr));
+			
+			valueStr = encodeURI(valueStr);
+			
+			document.cookie = keyStr+"="+valueStr;
+			console.log(document.cookie);
+			
+			// ⑥ cookie 的过期时间
+			var apDate = new Date(2018,0,1);
+			document.cookie = "age=18;expires=" + apDate;
+			console.log(document.cookie);
+			
+			// ⑦ 出现相同 key 时，值覆盖
+			document.cookie = "name=dada";
+			console.log(document.cookie);
+		}
+	</script>
+</html>
